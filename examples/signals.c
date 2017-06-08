@@ -17,26 +17,26 @@ void mySigHandler(int signalCode)
 int main(void) 
 {
     // set handler
-	puts("setting custom handler for SIGINT...");
+    puts("setting custom handler for SIGINT...");
     signal(SIGINT, mySigHandler);
 
     // ignore signal
-	puts("ignoring SIGABRT...");
+    puts("ignoring SIGABRT...");
     signal(SIGABRT, SIG_IGN);
 	
-	// send a signal to current process
-	puts("sending SIGABRT to current process...");
+    // send a signal to current process
+    puts("sending SIGABRT to current process...");
     raise(SIGABRT);
 
     // send SIG to process
-	puts("sending SIGINT to current process...");
+    puts("sending SIGINT to current process...");
     kill(getpid(), SIGINT);
 
     // restore signal default
-	puts("restoring signal defaults...");
+    puts("restoring signal defaults...");
     signal(SIGABRT, SIG_DFL);
-	signal(SIGINT, SIG_DFL);
+    signal(SIGINT, SIG_DFL);
 	
-	printf("send a SIGINT with ctrl-C to quit the loop\n");
+    printf("send a SIGINT with ctrl-C to quit the loop\n");
     while (1) {}
 }
